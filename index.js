@@ -3,6 +3,7 @@
 const { setdata } = require("./data");
 const { getdata } = require("./data");
 const { savedata } = require("./data");
+const { expire } = require("./data");
 var net = require("net");
 var server = net.createServer(function (socket) {
   socket.on("data", function (data) {
@@ -21,6 +22,9 @@ var server = net.createServer(function (socket) {
       socket.write("server reply " + Object.values(output));
     } else if (input[0] == "save") {
       const output = savedata(req);
+      socket.write("server reply " + Object.values(output));
+    } else if (input[0] == "expire") { 
+      const output = expire(req);
       socket.write("server reply " + Object.values(output));
     } else if (input[0] == "quit") {
       socket.end("server is stoped \n");

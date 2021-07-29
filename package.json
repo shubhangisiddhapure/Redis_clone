@@ -5,12 +5,16 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "express": "^4.17.1",
-    "net": "^1.0.2"
+    "jest": "^27.0.6",
+    "mongodb-memory-server": "^6.9.6",
+    "mongoose": "^5.13.3",
+    "net": "^1.0.2",
+    "supertest": "^6.1.4"
   }
 }
