@@ -4,6 +4,8 @@ const { setdata } = require("./data");
 const { getdata } = require("./data");
 const { savedata } = require("./data");
 const { expire } = require("./data");
+const { lpush } = require("./data");
+const { lrange } = require("./data");
 var net = require("net");
 var server = net.createServer(function (socket) {
   socket.on("data", function (data) {
@@ -23,8 +25,14 @@ var server = net.createServer(function (socket) {
     } else if (input[0] == "save") {
       const output = savedata(req);
       socket.write("server reply " + Object.values(output));
-    } else if (input[0] == "expire") { 
+    } else if (input[0] == "expire") {
       const output = expire(req);
+      socket.write("server reply " + Object.values(output));
+    } else if (input[0] == "lpush") {
+      const output = lpush(req);
+      socket.write("server reply " + Object.values(output));
+    } else if (input[0] == "lrange") {
+      const output = lrange(req);
       socket.write("server reply " + Object.values(output));
     } else if (input[0] == "quit") {
       socket.end("server is stoped \n");
