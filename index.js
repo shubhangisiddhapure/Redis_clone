@@ -6,6 +6,7 @@ const { savedata } = require("./data");
 const { expire } = require("./data");
 const { lpush } = require("./data");
 const { lrange } = require("./data");
+const { lpop } = require("./data");
 var net = require("net");
 var server = net.createServer(function (socket) {
   socket.on("data", function (data) {
@@ -33,6 +34,9 @@ var server = net.createServer(function (socket) {
       socket.write("server reply " + Object.values(output));
     } else if (input[0] == "lrange") {
       const output = lrange(req);
+      socket.write("server reply " + Object.values(output));
+    } else if (input[0] == "lpop") {
+      const output = lpop(req);
       socket.write("server reply " + Object.values(output));
     } else if (input[0] == "quit") {
       socket.end("server is stoped \n");

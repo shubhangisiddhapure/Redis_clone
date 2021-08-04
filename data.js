@@ -87,8 +87,7 @@ const lrange = (req) => {
         for (var i = data[2]; i <= data[3]; i++) {
           answer.push(output[i] + "\n");
         }
-
-        return { status: answer + "\n" };
+        return { status: answer };
       } else {
         return { res: "Value is not an integer or out of range \n" };
       }
@@ -100,4 +99,36 @@ const lrange = (req) => {
   }
 };
 
-module.exports = { setdata, getdata, savedata, expire, lpush, lrange };
+const lpop = (req) => {
+  const data = req.body.input;
+  if (data.length === 3) {
+    if (dic[data[1]]) {
+      const count = parseInt(data[2]);
+      if (Number.isInteger(count)) {
+          var answer = [];
+          const output = dic[data[1]];
+          for (var i =0; i <= data[2]; i++) {
+            answer.push(output[i]+"\n");
+            delete output[i]
+          }
+          return { status: answer+"\n" };
+
+      } else {
+        return { res: "Value is out of range, must be positive \n" };
+      }
+     
+    } else {
+      return { res: 0 + "key does not exist \n" };
+    }
+
+  } else {
+    return { res: "wrong number of arguments for 'lpush' command \n" };
+  }
+};
+
+
+
+
+
+
+module.exports = { setdata, getdata, savedata, expire, lpush, lrange,lpop };
