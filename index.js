@@ -45,4 +45,6 @@ var server = net.createServer(function (socket) {
     }
   });
 });
+
 server.listen(7777);
+console.log('Port is listing on 7777')
